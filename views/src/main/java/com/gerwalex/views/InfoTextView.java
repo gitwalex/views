@@ -17,8 +17,6 @@ import androidx.annotation.StringRes;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.core.content.ContextCompat;
 
-
-
 import java.util.Objects;
 
 /**
@@ -50,7 +48,8 @@ public class InfoTextView extends AppCompatTextView {
     public InfoTextView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         infoText = getResources().getString(R.string.defaultInfoText);
-        TypedArray a = context.getTheme()
+        TypedArray a = context
+                .getTheme()
                 .obtainStyledAttributes(attrs, R.styleable.InfoTextView, R.attr.infoTextViewStyle,
                         R.style.Gerwalex_InfoTextViewStyle);
         try {
@@ -98,7 +97,9 @@ public class InfoTextView extends AppCompatTextView {
             builder.setIcon(R.drawable.ic_info_outline_24dp);
             builder.setTitle(R.string.infoDialogTitle);
             builder.setMessage(infoText);
-            builder.create().show();
+            builder
+                    .create()
+                    .show();
         }
         return super.performClick();
     }

@@ -16,8 +16,6 @@ import androidx.databinding.BindingAdapter;
 import androidx.databinding.InverseBindingAdapter;
 import androidx.databinding.InverseBindingListener;
 
-
-
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.Currency;
@@ -50,7 +48,9 @@ public class CurrencyEditTextView extends AppCompatEditText {
 
     {
         cf = (DecimalFormat) NumberFormat.getCurrencyInstance(Locale.getDefault());
-        currencyUnits = (int) Math.pow(10, Currency.getInstance(Locale.getDefault()).getDefaultFractionDigits());
+        currencyUnits = (int) Math.pow(10, Currency
+                .getInstance(Locale.getDefault())
+                .getDefaultFractionDigits());
     }
 
     public CurrencyEditTextView(Context context) {

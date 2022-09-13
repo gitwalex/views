@@ -10,9 +10,6 @@ import androidx.databinding.BindingAdapter;
 import androidx.databinding.InverseBindingAdapter;
 import androidx.databinding.InverseBindingListener;
 
-
-
-
 public class PercentEditText extends AppCompatEditText {
     private InverseBindingListener mBindingListener;
     private float value;

@@ -11,9 +11,6 @@ import androidx.databinding.BindingAdapter;
 import androidx.databinding.InverseBindingAdapter;
 import androidx.databinding.InverseBindingListener;
 
-
-
-
 /**
  * Zeigt einen Text als Prozentwert.
  */
