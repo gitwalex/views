@@ -67,12 +67,12 @@ public class PercentTextView extends AppCompatTextView {
     }
 
     private void init(Context context, AttributeSet attrs) {
-        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.PercentTextView);
-        colorMode = a.getBoolean(R.styleable.PercentTextView_colorMode, true);
-        a.recycle();
-        defaultColor = getCurrentTextColor();
-        setGravity(Gravity.END);
-        setEms(5);
-        setText(MyConverter.convertPercent(value));
+        try (TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.PercentTextView)) {
+            colorMode = a.getBoolean(R.styleable.PercentTextView_colorMode, true);
+            defaultColor = getCurrentTextColor();
+            setGravity(Gravity.END);
+            setEms(5);
+            setText(MyConverter.convertPercent(value));
+        }
     }
 }

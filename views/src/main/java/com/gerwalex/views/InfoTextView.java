@@ -48,11 +48,10 @@ public class InfoTextView extends AppCompatTextView {
     public InfoTextView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         infoText = getResources().getString(R.string.defaultInfoText);
-        TypedArray a = context
+        try (TypedArray a = context
                 .getTheme()
                 .obtainStyledAttributes(attrs, R.styleable.InfoTextView, R.attr.infoTextViewStyle,
-                        R.style.Gerwalex_InfoTextViewStyle);
-        try {
+                        R.style.Gerwalex_InfoTextViewStyle)) {
             int infotext_padding = (int) a.getDimension(R.styleable.InfoTextView_iconPadding, -1);
             setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.ic_info_outline_24dp, 0, 0, 0);
             setCompoundDrawablePadding(infotext_padding);
@@ -69,8 +68,6 @@ public class InfoTextView extends AppCompatTextView {
                 popupWidth = (int) a.getDimension(R.styleable.InfoTextView_popupWidth, -1);
             }
             // TODO: 10.11.2021 PopupWindow auslagern
-        } finally {
-            a.recycle();
         }
         setClickable(true);
     }

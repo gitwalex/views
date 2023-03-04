@@ -14,6 +14,8 @@ import androidx.databinding.InverseBindingAdapter;
 import androidx.databinding.InverseBindingListener;
 
 import java.math.BigDecimal;
+import java.util.Currency;
+import java.util.Locale;
 import java.util.Objects;
 
 /**
@@ -21,6 +23,10 @@ import java.util.Objects;
  * in rot gezeigt.
  */
 public class CurrencyTextView extends AppCompatTextView {
+    public final BigDecimal units = BigDecimal.valueOf(Math.pow(10, Currency
+            .getInstance(Locale.getDefault())
+            .getDefaultFractionDigits()));
+
     private boolean colorMode;
     private int defaultColor;
     private InverseBindingListener mBindingListener;
@@ -72,7 +78,7 @@ public class CurrencyTextView extends AppCompatTextView {
     }
 
     public long getValue() {
-        return (long) (value.doubleValue() * MyConverter.units);
+        return value.multiply(units).longValue();
     }
 
     /**
@@ -99,22 +105,22 @@ public class CurrencyTextView extends AppCompatTextView {
     }
 
     public void setValue(long amount) {
-        setValue(new BigDecimal(amount / MyConverter.units));
+        setValue(new BigDecimal(amount).divide(units));
     }
 
     private void init(Context context, AttributeSet attrs) {
-        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.CurrencyTextView);
-        if (isInEditMode()) {
-            value = new BigDecimal(123_456_789L);
+        try (TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.CurrencyTextView)) {
+            if (isInEditMode()) {
+                value = new BigDecimal(123_456_789L);
+            }
+            colorMode = a.getBoolean(R.styleable.CurrencyTextView_colorMode, true);
+            defaultColor = getCurrentTextColor();
+            setGravity(Gravity.END);
+            setEms(7);
+            setText(MyConverter.convertCurrency(value));
+            setFocusable(false);
+            setCursorVisible(false);
         }
-        colorMode = a.getBoolean(R.styleable.CurrencyTextView_colorMode, true);
-        a.recycle();
-        defaultColor = getCurrentTextColor();
-        setGravity(Gravity.END);
-        setEms(7);
-        setText(MyConverter.convertCurrency(value));
-        setFocusable(false);
-        setCursorVisible(false);
     }
 
     public void postValue(long value) {

@@ -99,20 +99,17 @@ public class CurrencyEditTextView extends AppCompatEditText {
     }
 
     private void init(Context context, AttributeSet attrs) {
-        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.CurrencyEditTextView);
-        try {
+        try (TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.CurrencyEditTextView)) {
             colorMode = a.getBoolean(R.styleable.CurrencyTextView_colorMode, true);
-        } finally {
-            a.recycle();
+            defaultColor = getCurrentTextColor();
+            setGravity(Gravity.END);
+            setEms(7);
+            setInputType(
+                    InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL | InputType.TYPE_NUMBER_FLAG_SIGNED);
+            setSelectAllOnFocus(true);
+            value = isInEditMode() ? 123_456_789L : 0;
+            convertCurrency();
         }
-        defaultColor = getCurrentTextColor();
-        setGravity(Gravity.END);
-        setEms(7);
-        setInputType(
-                InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL | InputType.TYPE_NUMBER_FLAG_SIGNED);
-        setSelectAllOnFocus(true);
-        value = isInEditMode() ? 123_456_789L : 0;
-        convertCurrency();
     }
 
     @Override
