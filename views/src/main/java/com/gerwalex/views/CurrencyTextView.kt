@@ -19,8 +19,6 @@ import kotlin.math.pow
  * Zeigt einen Betrag in der jeweiligen Waehrung an. Als Defult wird bei negativen Werten der Text
  * in rot gezeigt.
  */
-@Deprecated("Ersetzt durch CurrencyCalculatorView", ReplaceWith("CurrencyCalculatorView"))
-
 class CurrencyTextView : AppCompatTextView {
     private val units = BigDecimal.valueOf(10.0.pow(Currency.getInstance(Locale.getDefault()).defaultFractionDigits.toDouble()))
     private var colorMode = false
@@ -99,13 +97,13 @@ class CurrencyTextView : AppCompatTextView {
     companion object {
         @JvmStatic
         @InverseBindingAdapter(attribute = "value")
-        fun getBigDecimal(view: CurrencyCalculatorView): BigDecimal {
+        fun getBigDecimal(view: CurrencyTextView): BigDecimal {
             return view.value
         }
 
         @JvmStatic
         @InverseBindingAdapter(attribute = "value")
-        fun getAsLongValue(view: CurrencyCalculatorView): Long {
+        fun getAsLongValue(view: CurrencyTextView): Long {
             return view.getAsLongValue()
         }
 
