@@ -111,14 +111,14 @@ class CurrencyTextView : AppCompatTextView {
 
         @JvmStatic
         @BindingAdapter(value = ["value", "valueAttrChanged"], requireAll = false)
-        fun setBigDecimal(view: CurrencyCalculatorView, value: BigDecimal, listener: InverseBindingListener?) {
+        fun setBigDecimal(view: CurrencyTextView, value: BigDecimal, listener: InverseBindingListener?) {
             view.mBindingListener = listener
             view.value = value
         }
 
         @JvmStatic
         @BindingAdapter(value = ["value", "valueAttrChanged"], requireAll = false)
-        fun setValue(view: CurrencyCalculatorView, value: Long, listener: InverseBindingListener?) {
+        fun setValue(view: CurrencyTextView, value: Long, listener: InverseBindingListener?) {
             view.mBindingListener = listener
             view.setValue(value)
         }
